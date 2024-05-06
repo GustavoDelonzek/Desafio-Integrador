@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+#pagina-principal {
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+#pagina-principal .secao-um {
+    min-height: 100vh;
+    background: linear-gradient(to right, hsla(216, 92%, 60%, 0.363), #b5c5ee50), 
+    url("../../assets/images/bench-accounting-C3V88BOoRoM-unsplash.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+#pagina-principal .texto-header{
+    color: #ffffff;
+}
+
+#pagina-principal .titulo-header{
+    font-weight: bold;
+    font-size: 60px;
+}
+
+#pagina-principal .secao-dois {
+    min-height: 100vh;
+    background-color: #bfdcfe;
+}

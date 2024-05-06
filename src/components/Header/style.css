@@ -1,0 +1,23 @@
+#cabecalho{
+    
+    background-color: #fff;
+}
+
+.link-cor{
+    color: #3a86f7;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.473);
+}
+.link-cor:hover{
+    color: #195feb;
+    
+}
+
+.link-estilo{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.logo-principal{
+    font-weight: 700;
+    font-size: 22px;
+}
