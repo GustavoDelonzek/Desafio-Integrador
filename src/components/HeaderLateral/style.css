@@ -1,0 +1,31 @@
+#dashboard{
+    position: block;
+    
+    min-height: 100vh;
+    overflow: hidden;
+
+}
+
+#dashboard .dashboard-lista{
+    list-style: none;
+    padding: 0;
+}
+
+#dashboard .lista-item{
+    display: block;
+    padding: 10px 8px;
+    margin: 7px 0;
+    color: white;
+    text-decoration: none;
+}
+#dashboard .lista-item:hover{
+    background-color: gray;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#dashboard .lista-item:focus{
+    background-color: gray;
+    border-radius: 8px;
+    cursor: pointer;
+}

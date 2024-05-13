@@ -20,10 +20,7 @@ function Header() {
                     <div className="collapse navbar-collapse justify-content-end" id="navbarHeader">
                         <ul className="navbar-nav  mb-2 mb-lg-0">
                             <li className="nav-item ">
-                                <Link className="nav-link link-cor link-estilo" to='/'>Home</Link>
-                            </li>
-                            <li className="nav-item ">
-                                <a className="nav-link link-cor link-estilo" href="#">Atendimento</a>
+                                <Link to='/dashboard' className="nav-link link-cor link-estilo" href="#">Atendimento</Link>
                             </li>
                             <li className="nav-item ">
                                 <a className="nav-link link-cor link-estilo" href="#">Login</a>
