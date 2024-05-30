@@ -1,0 +1,45 @@
+#cadastro-page,
+#login-page {
+    min-height: 100vh;
+}
+
+.estilo-geral {
+    min-height: 70vh;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 2px 9px 0px rgba(158, 150, 158, 0.8);
+    -moz-box-shadow: 0px 2px 9px 0px rgba(158, 150, 158, 0.8);
+    box-shadow: 0px 2px 9px 0px rgba(158, 150, 158, 0.8);
+}
+
+.estilo-geral .body-titulo {
+    background-color: #00427f94;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px 0;
+    color: white;
+}
+
+.form-control {
+    border-radius: 30px;
+    background-color: #e6dfdf;
+    padding: 12px;
+}
+
+.botao-cadastro,
+.botao-login {
+    background-color: #00427f94;
+    border-radius: 30px;
+    padding: 10px 0;
+    color: white;
+}
+
+.botao-cadastro:hover,
+.botao-login:hover {
+    background-color: #1467b685;
+    color: #e6dfdf;
+}
+
+.botao-link {
+    color: #00427f94;
+    text-decoration: none;
+}

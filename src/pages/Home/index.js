@@ -8,10 +8,13 @@ function Home() {
             <section className="row container-fluid secao-um">
 
                 <article className="col-12 align-items-center justify-content-center flex-column d-flex teste-texto">
-                    <h1 className="texto-header titulo-header">Sitema de chamados</h1>
+                    <h1 className="texto-header titulo-header">Sistema de chamados</h1>
                     <p className="texto-header">Aproveite agora a praticidade de resolver seus problemas</p>
+                    <div className="d-inline my-2">
+                        <Link to="/login" className="btn btn-light mx-2">Inscreva-se</Link>
+                        <Link to="/login" className="btn btn-light mx-2">Entrar</Link>
+                    </div>
 
-                    <button type="button" className="btn btn-light inline-block">Inscreva-se</button>
 
 
                 </article>

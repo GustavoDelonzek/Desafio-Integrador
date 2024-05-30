@@ -1,6 +1,5 @@
 #dashboard{
-    position: block;
-    
+    position: sticky;
     min-height: 100vh;
     overflow: hidden;
 
@@ -24,7 +23,7 @@
     cursor: pointer;
 }
 
-#dashboard .lista-item:focus{
+#dashboard .lista-item:focus, #dashboard .lista-item:active{
     background-color: gray;
     border-radius: 8px;
     cursor: pointer;

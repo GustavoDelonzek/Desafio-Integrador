@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cor-fundo{
+    background-color: rgb(228, 221, 221);
+}
+
+.box-chamados{
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resolvidos{ 
+
+    background-color: rgba(172, 255, 47, 0.418);
+}
+
+.nao-resolvidos{ 
+    background-color: rgba(255, 255, 0, 0.397);
+
+}
+
+.urgentes{ 
+
+    background-color: rgba(255, 0, 0, 0.37);
+}
