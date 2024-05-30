@@ -32,9 +32,9 @@ function Login() {
                 <article className="body-titulo"><h2 className="text-center">Login</h2></article>
                 
                 <article className="d-flex flex-column px-5 py-1">
-                    <input type="email" class="form-control my-2" value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput1" placeholder="name@example.com" />
+                    <input type="email" className="form-control my-2" value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput1" placeholder="name@example.com" />
 
-                    <input type="password" class="form-control my-2" value={senha} onChange={(e) => setSenha(e.target.value)} id="floatingInput2" placeholder="Insira sua senha" />
+                    <input type="password" className="form-control my-2" value={senha} onChange={(e) => setSenha(e.target.value)} id="floatingInput2" placeholder="Insira sua senha" />
 
                     <button type="submit" className="btn botao-login" onClick={handleSignIn}>Entrar</button>
                 </article>

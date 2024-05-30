@@ -18,14 +18,14 @@ function HeaderLateral(){
 
                 </ul>
                 <hr />
-                <div class="btn-group dropup">
-                    <a type="button" class="dropdown-toggle text-decoration-none text-white" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://picsum.photos/360/360?r=2" alt="" width="32" height="32" class="rounded-circle "/>Gus
+                <div className="btn-group dropup">
+                    <a type="button" className="dropdown-toggle text-decoration-none text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://picsum.photos/360/360?r=2" alt="" width="32" height="32" className="rounded-circle "/>Gus
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">cu</a></li>
-                        <li><a class="dropdown-item" href="#">cu</a></li>
-                        <li><a class="dropdown-item" href="#">cu</a></li>
+                    <ul className="dropdown-menu">
+                        <li><a className="dropdown-item" href="#">cu</a></li>
+                        <li><a className="dropdown-item" href="#">cu</a></li>
+                        <li><a className="dropdown-item" href="#">cu</a></li>
                     </ul>
                 </div>
             </nav>

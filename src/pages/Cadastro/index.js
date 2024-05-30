@@ -32,11 +32,11 @@ function Cadastro() {
                 </article>
                 <article className="d-flex flex-column px-5 py-4">
 
-                        <input type="text" class="form-control my-2"  value={username} onChange={(e) => setUsername(e.target.value)} id="floatingInput" placeholder="Insira seu username"/>
+                        <input type="text" className="form-control my-2"  value={username} onChange={(e) => setUsername(e.target.value)} id="floatingInput" placeholder="Insira seu username"/>
                         <hr></hr>
-                        <input type="email" class="form-control my-2"  value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput1" placeholder="name@example.com"/>
+                        <input type="email" className="form-control my-2"  value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput1" placeholder="name@example.com"/>
                          
-                        <input type="password" class="form-control my-2"  value={senha} onChange={(e) => setSenha(e.target.value)} id="floatingInput2" placeholder="Insira sua senha"/>
+                        <input type="password" className="form-control my-2"  value={senha} onChange={(e) => setSenha(e.target.value)} id="floatingInput2" placeholder="Insira sua senha"/>
                          
 
                     <button type="submit" className="btn botao-cadastro" onClick={handleSubmit}>Cadastrar</button>
