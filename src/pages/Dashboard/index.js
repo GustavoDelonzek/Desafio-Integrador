@@ -1,51 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.css";
 
 import { Link } from "react-router-dom";
-import HeaderLateral from "../../components/HeaderLateral";
+import Header from "../../components/Header";
+import { ChamadoCrudContext } from "../../contexts/chamadoCrud";
+
+import imagem from "../../assets/images/ben-kolde-FaPxZ88yZrw-unsplash.jpg"
 
 function Dashboard() {
-    const {innerWidth: width, innerHeight: height} = window;
+    const { chamado } = useContext(ChamadoCrudContext);
 
     return (
+        <>
 
-        <main className="container-fluid" >
-            <section className="row">
-                <HeaderLateral />
-                <section className="text-center col-10 cor-fundo" >
-                    <h1 className="col-12 p-2 my-2">Seja bem-vindo!</h1>
-                    <article className="row">
-                        <div className="col-md-6 px-4 my-2">
-
-                            <div className="row bg-light justify-content-center p-2">
-                                <h3>Chamados</h3>
-                                <div className="box-chamados resolvidos mx-1 ">
-                                    <small>Resolvidos</small>
-                                    <h2>4</h2>
-                                </div>
-                                <div className="box-chamados nao-resolvidos mx-1">
-                                <small>Não Resolvidos</small>
-                                    <h2>3</h2>
-                                </div>
-                                <div className="box-chamados urgentes mx-1">
-                                <small>Urgentes</small>
-                                    <h2>0</h2>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className="col-md-6  px-4 my-2">
-                            {width}
-
-                        </div>
-
-
+            <Header></Header>
+            <main className="py-4 container" >
+                <section className="mb-4">
+                    <article className="d-flex justify-content-between">
+                        <h4>Chamados: </h4>
+                        <button className="btn btn-crud-chamado">Adicionar</button>
                     </article>
                 </section>
-            </section>
+                <section>
+                    {chamado.map((element) => (
+                        <div className="card mb-3" >
+                            <div className="row g-0">
+                                <div className="col-md-3">
+                                    <img src={imagem} className="rounded-start img-fluid" alt="..." />
+                                </div>
+                                <div className="col-md-9">
+                                    <div className="card-body d-flex flex-column justify-content-between">
+                                        <div>
+                                            <h5 className="card-title">{element.sala} - {element.bloco}</h5>
+                                            <p className="card-text">{element.categoria}</p>
+                                        </div>
+                                        <p className="card-text">{element.descricao}</p>
+                                        <p className="card-text"><small className="text-body-secondary">{element.data.toLocaleString()} - {element.usuario}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
 
-        </main>
+
+                </section>
+            </main>
+        </>
+
+
     )
 }
 

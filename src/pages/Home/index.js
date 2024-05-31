@@ -4,20 +4,33 @@ import { Link } from "react-router-dom";
 
 function Home() {
     return (
-        <main id="pagina-principal" className="d-flex flex-column align-items-center">
-            <section className="row container-fluid secao-um">
-
-                <article className="col-12 align-items-center justify-content-center flex-column d-flex teste-texto">
-                    <h1 className="texto-header titulo-header">Sistema de chamados</h1>
-                    <p className="texto-header">Aproveite agora a praticidade de resolver seus problemas</p>
-                    <div className="d-inline my-2">
-                        <Link to="/login" className="btn btn-light mx-2">Inscreva-se</Link>
-                        <Link to="/login" className="btn btn-light mx-2">Entrar</Link>
-                    </div>
-
-
-
+        <main id="pagina-principal" className="row">
+            <section className="col-lg-8 col-sm-6 col-4 secao-dois d-flex flex-column justify-content-start align-items-center p-5">
+                <article className="">
+                    <h1 className=" texto-header">Sistema de chamados</h1>
+                    <h1 className=" titulo-header">NTI</h1>
                 </article>
+                <article className="imagem">
+                </article>
+
+            </section>
+            <section className="col-lg-4 col-sm-6 col-8 d-flex flex-column justify-content-center align-items-center">
+                <article>
+                    <h2 className="cor-azul">Vamos começar</h2>
+                </article>
+                <article>
+                    <p className="">Para iniciar, faça login ou se registre.</p>
+                </article>
+                <div className="d-flex">
+                    <article className="mx-2">
+                        <Link to="/cadastro" className="btn cor-azul-botao ">Registre-se</Link>
+                    </article>
+                    <article className="mx-2">
+
+                        <Link to="/login" className="btn cor-azul-botao ">Entrar</Link>
+                    </article>
+                </div>
+
             </section>
 
         </main>

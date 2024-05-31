@@ -1,26 +1,5 @@
-#cabecalho{
-    background: rgba(0, 0, 0, 0);
-    position: absolute;
-    width: 100%;
-    z-index: 100;
-    min-height: max-content;
-}
-
-.link-cor{
-    color: #f1f1f1;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.473);
-}
-.link-cor:hover{
-    color: #195feb;
-    
-}
-
-.link-estilo{
-    font-weight: 400;
-    font-size: 18px;
-}
-
-.logo-principal{
-    font-weight: 700;
-    font-size: 22px;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

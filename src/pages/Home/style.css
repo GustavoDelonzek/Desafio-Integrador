@@ -1,28 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
 * {
     padding: 0;
     margin: 0;
-
+    box-sizing: border-box;
 }
 
 #pagina-principal {
     min-height: 100vh;
-    background-color: #fff;
+    background-color: #b7c8d6;
 }
 
 #pagina-principal .secao-um {
     min-height: 100vh;
-    background: linear-gradient(to right, #00427f94, #e3ae0075), 
-    url("../../assets/images/bench-accounting-C3V88BOoRoM-unsplash.jpg");
+    background: linear-gradient(to right, #00427fbb, #e3ae0077),
+        url("../../assets/images/bench-accounting-C3V88BOoRoM-unsplash.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center center;
 }
-
-#pagina-principal .texto-header{
-    color: #ffffff;
+#pagina-principal .secao-dois {
+    min-height: 100vh;
+    background-color: #6B91B5;
 }
 
-#pagina-principal .titulo-header{
-    font-weight: bold;
-    font-size: 48px;
+#pagina-principal .texto-header {
+    color: #b5cbe0;
+    font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-style: italic;
 }
+
+
+
+#pagina-principal .titulo-header {
+
+    color: #2D6396;
+    font-family: "Merriweather", serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 46px;
+    text-align: center;
+
+}
+
+#pagina-principal .fonte-texto{
+    font-weight: 300;
+    font-family: "Merriweather", serif;
+}
+
+#pagina-principal .imagem{
+    background: url("../../assets/images/este.svg");
+    width: 70%;
+    height: 70%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#pagina-principal .cor-azul{
+    color: #2D6396;
+}
+
+#pagina-principal .cor-azul-botao{
+    border: solid 1px #2D6396;
+    color: #2D6396;
+}
+
+#pagina-principal .cor-azul-botao:hover{
+    background-color: #2D6396;
+    color: #b5cbe0;
+}
+

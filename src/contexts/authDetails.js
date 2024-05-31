@@ -46,7 +46,7 @@ function AuthProvider({ children }) {
 
         let data = {
           uid: uid,
-          username: docSnap.data().username,
+          cargo: docSnap.data().cargo,
           email: value.user.email
         }
 
@@ -62,9 +62,7 @@ function AuthProvider({ children }) {
 
   }
 
-
-  // Cadastrar um novo user
-  async function signUp(email, password, username) {
+  async function signUp(email, password, cargo) {
     setLoadingAuth(true);
 
     await createUserWithEmailAndPassword(auth, email, password)
@@ -72,13 +70,13 @@ function AuthProvider({ children }) {
         let uid = value.user.uid
 
         await setDoc(doc(db, "users", uid), {
-          username: username
+          cargo: cargo
         })
           .then(() => {
 
             let data = {
               uid: uid,
-              username: username,
+              cargo: cargo,
               email: value.user.email,
               avatarUrl: null
             };

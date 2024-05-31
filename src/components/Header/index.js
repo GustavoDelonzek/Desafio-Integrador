@@ -1,33 +1,26 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./style.css"
 import { FcOnlineSupport } from "react-icons/fc";
-
-import logo from "../../assets/images/help-desk.png"
+import { AuthContext } from "../../contexts/authDetails";
+import { FaCircleUser } from "react-icons/fa6";
 
 
 function Header() {
+    const { user } = useContext(AuthContext);
+
     return (
-        <header id="cabecalho" className="container-fluid ">
-            <nav className="navbar navbar-expand-lg p-2">
-                <div className="container-fluid d-flex justify-content-between">
-                    <a className="navbar-brand link-cor logo-principal" href="#"><img src={logo} width="46"/>NTI</a>
+        <header id="cabecalho">
+            <nav className="navbar bg-body-tertiary">
+                <div className="container-fluid d-flex flex-row justify-content-end">
+                    {user ? (
+                        <div className="d-flex align-items-center">
+                            <button className='btn' type='button' >{user.email}  <FaCircleUser size={35}/></button>
+                           
+                        </div>
 
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div className="collapse navbar-collapse justify-content-end" id="navbarHeader">
-                        <ul className="navbar-nav  mb-2 mb-lg-0">
-                            <li className="nav-item ">
-                                <Link to='/dashboard' className="nav-link link-cor link-estilo" href="#">Atendimento</Link>
-                            </li>
-                            <li className="nav-item ">
-                                <a className="nav-link link-cor link-estilo" href="#">Login</a>
-                            </li>
-                        </ul>
-
-                    </div>
+                    )
+                        : ('Erro ao carregar dados...')}
                 </div>
             </nav>
         </header>
