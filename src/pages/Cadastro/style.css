@@ -45,3 +45,10 @@
     color: #00427f94;
     text-decoration: none;
 }
+
+.flecha-home{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #1468b6;
+}

@@ -16,7 +16,7 @@ function Header() {
                 <div className="container-fluid d-flex flex-row justify-content-end">
                     {user ? (
                         <div className="d-flex align-items-center">
-                            <button className='btn cor-azul-claro' type='button' >{user.email}  <PiUserCircleFill size={45}/></button>
+                            <button className='btn cor-azul-claro' type='button' >{user.cargo}  <PiUserCircleFill size={45}/></button>
                            
                         </div>
 

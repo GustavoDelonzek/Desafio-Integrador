@@ -3,7 +3,7 @@ import '../Cadastro/style.css'
 import { useNavigate, Link } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/authDetails"
-
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 function Login() {
 
@@ -27,25 +27,29 @@ function Login() {
     }
 
     return (
-        <main id="login-page" className="d-flex justify-content-center align-items-center">
-            <section className="estilo-geral col-md-4 col-sm-8 col-10 d-flex flex-column justify-content-between pb-4">
-                <article className="body-titulo"><h2 className="text-center">Login</h2></article>
-                
-                <article className="d-flex flex-column px-5 py-1">
-                    <input type="email" class="form-control my-2" value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput1" placeholder="name@example.com" />
+        <>
+            <Link to="/" className="flecha-home"><IoArrowBackCircleOutline size={35} /></Link>
+            <main id="login-page" className="d-flex justify-content-center align-items-center">
+                <section className="estilo-geral col-md-4 col-sm-8 col-10 d-flex flex-column justify-content-between pb-4">
+                    <article className="body-titulo"><h2 className="text-center">Login</h2></article>
 
-                    <input type="password" class="form-control my-2" value={senha} onChange={(e) => setSenha(e.target.value)} id="floatingInput2" placeholder="Insira sua senha" />
+                    <article className="d-flex flex-column px-5 py-1">
+                        <input type="email" class="form-control my-2" value={email} onChange={(e) => setEmail(e.target.value)} id="floatingInput1" placeholder="name@example.com" />
 
-                    <button type="submit" className="btn botao-login" onClick={handleSignIn}>Entrar</button>
-                </article>
+                        <input type="password" class="form-control my-2" value={senha} onChange={(e) => setSenha(e.target.value)} id="floatingInput2" placeholder="Insira sua senha" />
 
-                <article className="d-flex flex-column align-items-center">
-                    <small>Não tem uma conta?</small>
-                    <Link className="botao-link" to="/cadastro">Cadastre-se</Link>
-                </article>
-            </section>
+                        <button type="submit" className="btn botao-login" onClick={handleSignIn}>Entrar</button>
+                    </article>
 
-        </main>
+                    <article className="d-flex flex-column align-items-center">
+                        <small>Não tem uma conta?</small>
+                        <Link className="botao-link" to="/cadastro">Cadastre-se</Link>
+                    </article>
+                </section>
+
+            </main>
+        </>
+
     )
 }
 
