@@ -1,16 +1,60 @@
+:root{
+    --azul-escuro: #2D6396;
+    --azul-claro: #b5cbe0;
+}
+
+.cor-azul-claro{
+    color: var(--azul-claro);
+}
+
+.cor-azul-escuro{
+    color: var(--azul-escuro);
+}
+
+#dashboard{
+    background-color: var(--azul-claro);
+    min-height: 100vh;
+}
+
 .btn-crud-chamado{
-    background-color: #2D6396;
+    background-color: var(--azul-escuro);
     border-radius: 20px;
     padding: 0 40px;
-    color: #b5cbe0;
+    color: var(--azul-claro);
 }
 .btn-crud-chamado:hover{
     background-color: #5787b4;
     border-radius: 20px;
     padding: 0 40px;
-    color: #b5cbe0;
+    color: var(--azul-claro);
 }
 
 .card-body{
     height: 100%;
+    background-color: rgba(70, 143, 253, 0.13);
+    padding-bottom: 10px;
+}
+
+#dashboard .maximo-imagem{
+    min-height: 200px;
+    background-image: url(../../assets/images/ben-kolde-FaPxZ88yZrw-unsplash.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+
+.imagem-card{
+    max-width: 100%;
+    min-height: 100%;
+}
+
+.botoes-edicao{
+    display: flex;
+    justify-content: end;
+}
+
+@media (max-width: 991px) {
+    .botoes-edicao{
+        display: flex;
+        justify-content: start;
+    }
 }

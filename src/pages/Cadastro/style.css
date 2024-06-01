@@ -21,7 +21,7 @@
     color: white;
 }
 
-.form-control {
+#cadastro-page .form-control, #login-page .form-control {
     border-radius: 30px;
     background-color: #e6dfdf;
     padding: 12px;

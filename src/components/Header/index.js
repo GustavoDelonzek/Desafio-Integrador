@@ -4,6 +4,7 @@ import "./style.css"
 import { FcOnlineSupport } from "react-icons/fc";
 import { AuthContext } from "../../contexts/authDetails";
 import { FaCircleUser } from "react-icons/fa6";
+import { PiUserCircleFill } from "react-icons/pi";
 
 
 function Header() {
@@ -11,11 +12,11 @@ function Header() {
 
     return (
         <header id="cabecalho">
-            <nav className="navbar bg-body-tertiary">
+            <nav className="navbar">
                 <div className="container-fluid d-flex flex-row justify-content-end">
                     {user ? (
                         <div className="d-flex align-items-center">
-                            <button className='btn' type='button' >{user.email}  <FaCircleUser size={35}/></button>
+                            <button className='btn cor-azul-claro' type='button' >{user.email}  <PiUserCircleFill size={45}/></button>
                            
                         </div>
 
