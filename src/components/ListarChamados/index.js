@@ -71,7 +71,7 @@ function ListarChamado() {
                     </article>
                 </section>
         <section className="p-1 container">
-            {(chamado.lenght > 0) ? (
+            {chamado && chamado.length > 0 ? (
                 <>
                     {chamado.map((element) => (
                 <div className="card mb-3" >
