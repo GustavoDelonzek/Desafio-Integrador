@@ -32,6 +32,7 @@ function AddChamado() {
             setCategoria('');
             setDescricao('');
             setItemDefeito('');
+            return window.location.reload()
             } catch(error){
                 console.error("Erro ao adicionar chamado: ", error)
             }

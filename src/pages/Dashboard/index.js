@@ -4,11 +4,12 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 
-import AddChamado from "../../components/AddChamado";
 import { BsClock } from "react-icons/bs";
 import ListarChamado from "../../components/ListarChamados";
+import { AuthContext } from "../../contexts/authDetails";
+import DashboardNti from "../../components/DashboardNti";
 function Dashboard() {
-    
+    const {user} = useContext(AuthContext);
     
 
 
@@ -17,14 +18,13 @@ function Dashboard() {
 
             <Header></Header>
             <main id="dashboard" className="py-4" >
-                <section className="mb-4 container">
-                    <article className="d-flex justify-content-between">
-                        <h3 className="cor-azul-escuro">Chamados: </h3>
-
-                        <AddChamado />
-                    </article>
-                </section>
-                <ListarChamado/>
+                {user.cargo == "professor" || user.cargo == "aluno" ? (
+                    
+                    <ListarChamado/>
+                ): (
+                    <DashboardNti/>
+                )}
+                
             </main>
         </>
 

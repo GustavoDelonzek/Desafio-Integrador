@@ -23,36 +23,72 @@ export const ChamadoCrudContext = createContext({});
 
 function ChamadoCrudProvider({ children }) {
     const [chamado, setChamado] = useState([]);
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const [salas, setSalas] = useState([])
 
 
     useEffect(() => {
-        async function loadChamado() {
-            const unsub = onSnapshot(collection(db, "chamados"), (snapshot) => {
-                let listaChamados = [];
-                snapshot.forEach((documento) => {
 
-                    listaChamados.push({
-                        id: documento.id,
-                        categoria: documento.data().categoria,
-                        sala: documento.data().sala,
-                        bloco: documento.data().bloco,
-                        descricao: documento.data().descricao,
-                        itemDefeito: documento.data().itemDefeito,
-                        data: documento.data().data.toDate(),
-                        usuario: documento.data().usuario
+        async function loadChamado() {
+            if (user.cargo == "professor" || user.cargo == "aluno") {
+                try {
+                    const q = query(collection(db, "chamados"), where("usuario", "==", user.email))
+                    const querySnapshot = await getDocs(q);
+
+                    let listaChamados = [];
+                    querySnapshot.forEach((documento) => {
+
+                        listaChamados.push({
+                            id: documento.id,
+                            categoria: documento.data().categoria,
+                            sala: documento.data().sala,
+                            bloco: documento.data().bloco,
+                            descricao: documento.data().descricao,
+                            itemDefeito: documento.data().itemDefeito,
+                            data: documento.data().data.toDate(),
+                            usuario: documento.data().usuario
+                        });
                     });
-                });
-                setChamado(listaChamados);
-            });
+                    setChamado(listaChamados);
+                } catch (error) {
+                    console.error("errou aqui ó", error)
+                }
+            } 
+
+            if (user.cargo == "nti"){
+                try {
+                    const q = collection(db, "chamados")
+                    const querySnapshot = await getDocs(q);
+
+                    let listaChamados = [];
+                    querySnapshot.forEach((documento) => {
+
+                        listaChamados.push({
+                            id: documento.id,
+                            categoria: documento.data().categoria,
+                            sala: documento.data().sala,
+                            bloco: documento.data().bloco,
+                            descricao: documento.data().descricao,
+                            itemDefeito: documento.data().itemDefeito,
+                            data: documento.data().data.toDate(),
+                            usuario: documento.data().usuario
+                        });
+                    });
+                    setChamado(listaChamados);
+                } catch (error) {
+                    console.error("errou aqui ó", error)
+                }
+            }
+
+
+
         }
         loadChamado();
-    }, [])
+    }, []);
 
-    
-    async function carregarSalas(bloco){
-        try{
+
+    async function carregarSalas(bloco) {
+        try {
             const q = query(collection(db, "salas"), where("bloco", "==", bloco))
             const querySnapshot = await getDocs(q);
             const listaSalas = [];
@@ -97,11 +133,12 @@ function ChamadoCrudProvider({ children }) {
         const docRef = doc(db, "chamados", id);
         await deleteDoc(docRef)
             .then(() => {
+
                 alert("CHAMADO DELETADO COM SUCESSO!");
             })
     }
 
-    async function editarChamado(id, categoria, descricao, itemDefeito, bloco, sala){
+    async function editarChamado(id, categoria, descricao, itemDefeito, bloco, sala) {
         const docRef = doc(db, "chamados", id);
         await updateDoc(docRef, {
             categoria: categoria,
@@ -109,7 +146,7 @@ function ChamadoCrudProvider({ children }) {
             itemDefeito: itemDefeito,
             bloco: bloco,
             sala: sala
-        }) .then(() => {
+        }).then(() => {
             alert('Atualizado com sucesso')
         })
     }

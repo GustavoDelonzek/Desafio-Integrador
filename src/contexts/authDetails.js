@@ -18,20 +18,18 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     async function loadUser() {
-      const storageUser = localStorage.getItem('@ticketsPRO')
-
+      const storageUser = localStorage.getItem('@ticketsPRO');
+      console.log("Storage User: ", storageUser); // Adicione este log
       if (storageUser) {
-        setUser(JSON.parse(storageUser))
-        setLoading(false);
+        const parsedUser = JSON.parse(storageUser);
+        console.log("Parsed User: ", parsedUser); // Adicione este log
+        setUser(parsedUser);
       }
-
-
       setLoading(false);
-
     }
-
+  
     loadUser();
-  }, [])
+  }, []);
 
 
   async function signIn(email, password) {
@@ -77,8 +75,7 @@ function AuthProvider({ children }) {
             let data = {
               uid: uid,
               cargo: cargo,
-              email: value.user.email,
-              avatarUrl: null
+              email: value.user.email
             };
 
             setUser(data);
@@ -122,7 +119,7 @@ function AuthProvider({ children }) {
         setUser
       }}
     >
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   )
 }

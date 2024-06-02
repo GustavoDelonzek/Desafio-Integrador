@@ -52,3 +52,9 @@
     top: 10px;
     color: #1468b6;
 }
+.flecha-home:hover{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #1468b6ad;
+}
