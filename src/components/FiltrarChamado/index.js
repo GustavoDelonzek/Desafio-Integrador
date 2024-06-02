@@ -19,6 +19,7 @@ function FiltrarChamado() {
             value: "3",
         },
     ];
+    
 
     return (
         <div >
@@ -32,30 +33,24 @@ function FiltrarChamado() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Criar chamado</h1>
+                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Filtrar por: </h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <form id="adicionar1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="row needs-validation">
-                                
-
-                                <div className="col-md-3">
-                                    <label className="form-label">Bloco:</label>
-                                    <select id="select-bloco" className="form-select"  aria-label="Default select example">
-                                        <option value="" hidden disabled>
-                                            Bloco
-                                        </option>
-                                        {blocos.map((opcao) => (
-                                            <option value={opcao.value} >{opcao.label}</option>
-                                        ))}
-                                    </select>
+                                <div className="col-6 p-1 d-flex justify-content-around">
+                                <button className="btn btn-primary px-4" type="button">Bloco</button>
+                                <button className="btn btn-primary px-4" type="button">Categoria</button>
                                 </div>
-
-                    
-
-                                <div className="col-12 d-flex justify-content-center my-2">
-                                    <button className="btn btn-primary" type="submit" data-bs-dismiss="modal" >Filtrar</button>
+                                <div className="col-6 p-1 d-flex justify-content-around">
+                                 
+                                <button className="btn btn-primary px-4" type="button">Item</button>
+                                <button className="btn btn-primary px-4" type="button">Data</button>
                                 </div>
+                               
+
+                                <hr className="mt-4"></hr>
+                            
                             </form>
                         </div>
 

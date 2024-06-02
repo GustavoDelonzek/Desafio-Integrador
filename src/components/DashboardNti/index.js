@@ -41,23 +41,7 @@ function DashboardNti() {
         },
     ];
 
-    async function editar() {
-        if (blocoEdit !== '' && salaEdit !== '' && categoriaEdit !== '' && descricaoEdit !== '' && itemDefeitoEdit !== '') {
-            try {
-                await editarChamado(id, categoriaEdit, descricaoEdit, itemDefeitoEdit, blocoEdit, salaEdit)
-                setId('')
-                setCategoriaEdit('')
-                setDescricaoEdit('')
-                setItemDefeitoEdit('')
-                setBlocoEdit('')
-                setSalaEdit('')
-
-                return window.location.reload()
-            } catch (error) {
-                alert(error)
-            }
-        }
-    }
+    
 
 
     return (
@@ -71,7 +55,7 @@ function DashboardNti() {
             </section>
             <section className="p-1 container">
                 {chamado.map((element) => (
-                    <div className="card mb-3" >
+                    <div className="card mb-3" key={element.id}>
                         <div className="row g-0">
                             <div className="col-md-2 col-sm-4 col-12 maximo-imagem" >
                             </div>
@@ -126,7 +110,7 @@ function DashboardNti() {
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => editar()}>Responder</button>
+                                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" >Responder</button>
                                                     </div>
                                                 </div>
                                             </div>

@@ -135,6 +135,7 @@ function ChamadoCrudProvider({ children }) {
             .then(() => {
 
                 alert("CHAMADO DELETADO COM SUCESSO!");
+                return window.location.reload()
             })
     }
 
