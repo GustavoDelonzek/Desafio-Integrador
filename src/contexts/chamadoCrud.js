@@ -30,7 +30,7 @@ function ChamadoCrudProvider({ children }) {
     useEffect(() => {
 
         async function loadChamado() {
-            if (user.cargo == "professor" || user.cargo == "aluno") {
+           
                 try {
                     const q = query(collection(db, "chamados"), where("usuario", "==", user.email))
                     const querySnapshot = await getDocs(q);
@@ -54,35 +54,9 @@ function ChamadoCrudProvider({ children }) {
                     console.error("errou aqui ó", error)
                 }
             } 
-
-            if (user.cargo == "nti"){
-                try {
-                    const q = collection(db, "chamados")
-                    const querySnapshot = await getDocs(q);
-
-                    let listaChamados = [];
-                    querySnapshot.forEach((documento) => {
-
-                        listaChamados.push({
-                            id: documento.id,
-                            categoria: documento.data().categoria,
-                            sala: documento.data().sala,
-                            bloco: documento.data().bloco,
-                            descricao: documento.data().descricao,
-                            itemDefeito: documento.data().itemDefeito,
-                            data: documento.data().data.toDate(),
-                            usuario: documento.data().usuario
-                        });
-                    });
-                    setChamado(listaChamados);
-                } catch (error) {
-                    console.error("errou aqui ó", error)
-                }
-            }
-
-
-
-        }
+                
+            
+        
         loadChamado();
     }, []);
 
