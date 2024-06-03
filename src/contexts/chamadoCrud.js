@@ -46,7 +46,9 @@ function ChamadoCrudProvider({ children }) {
                             descricao: documento.data().descricao,
                             itemDefeito: documento.data().itemDefeito,
                             data: documento.data().data.toDate(),
-                            usuario: documento.data().usuario
+                            usuario: documento.data().usuario,
+                            resposta: documento.data().resposta,
+                            dataResposta: documento.data().dataResposta?  documento.data().dataResposta.toDate() : null
                         });
                     });
                     setChamado(listaChamados);
@@ -71,7 +73,9 @@ function ChamadoCrudProvider({ children }) {
                             descricao: documento.data().descricao,
                             itemDefeito: documento.data().itemDefeito,
                             data: documento.data().data.toDate(),
-                            usuario: documento.data().usuario
+                            usuario: documento.data().usuario,
+                            resposta: documento.data().resposta,
+                            dataResposta: documento.data().dataResposta?  documento.data().dataResposta.toDate() : null
                         });
                     });
                     setChamado(listaChamados);
@@ -153,6 +157,18 @@ function ChamadoCrudProvider({ children }) {
     }
 
 
+    const adicionarResposta = async (id, respostaEdit) => {
+        const docRef = doc(db, "chamados", id);
+        await updateDoc(docRef, {
+            resposta: respostaEdit,
+            dataResposta: new Date()
+        }).then(() => {
+            alert('Resposta adicionada com sucesso');
+        }).catch(error => {
+            console.error("Erro ao adicionar resposta: ", error);
+        });
+    };
+
     return (
         <ChamadoCrudContext.Provider value={{
             handleAdd,
@@ -161,6 +177,7 @@ function ChamadoCrudProvider({ children }) {
             salas,
             carregarSalas,
             editarChamado,
+            adicionarResposta
         }}
         >
             {children}

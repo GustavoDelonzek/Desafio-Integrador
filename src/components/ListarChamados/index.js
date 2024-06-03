@@ -16,6 +16,7 @@ function ListarChamado() {
     const [salaEdit, setSalaEdit] = useState('');
     const [itemDefeitoEdit, setItemDefeitoEdit] = useState('');
     const [blocoEdit, setBlocoEdit] = useState('');
+    const [respostaEdit, setRespostaEdit] = useState('');
 
     useEffect(() => {
         if (blocoEdit) {
@@ -45,7 +46,7 @@ function ListarChamado() {
     async function editar() {
         if (blocoEdit !== '' && salaEdit !== '' && categoriaEdit !== '' && descricaoEdit !== '' && itemDefeitoEdit !== '') {
             try {
-                await editarChamado(id, categoriaEdit, descricaoEdit, itemDefeitoEdit, blocoEdit, salaEdit)
+                await editarChamado(id, categoriaEdit, descricaoEdit, itemDefeitoEdit, blocoEdit, salaEdit, respostaEdit)
                 setId('')
                 setCategoriaEdit('')
                 setDescricaoEdit('')
