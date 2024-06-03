@@ -5,7 +5,7 @@ import { BlockReason } from "firebase/vertexai-preview";
 
 
 function FiltrarChamado() {
-    const { chamadosNti, chamadosFiltrados, filtragem, cancelarFiltragem } = useContext(FiltrarContext);
+    const { chamadosNti, chamadosFiltrados, filtragem, cancelarFiltragem, chamadosRespondidos } = useContext(FiltrarContext);
 
     const [escolhaFilt, setEscolhaFilt] = useState('')
     const [collection, setCollection] = useState('')
@@ -87,7 +87,7 @@ function FiltrarChamado() {
                                 
                                 
 
-                                    <button className="btn btn-primary " type="button" data-bs-toggle="modal" data-bs-target="#filtrarItem">Respondida</button>
+                                    <button className="btn btn-primary " type="button" data-bs-dismiss="modal" onClick={() => chamadosRespondidos()}>Respondida</button>
                                     
 
                             </form>
@@ -164,25 +164,7 @@ function FiltrarChamado() {
                     </div>
                 </div>
             </div>
-            <div className="modal fade" id="filtrarItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Filtrar por: </h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form id="filtrobloco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="row needs-validation">
-
-
-
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            
 
         </div>
     )

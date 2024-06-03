@@ -134,120 +134,139 @@ function ListarChamado() {
                                                     <small className="text-body-secondary">{element.data.toLocaleString()} - {element.usuario}</small>
                                                 </p>
                                                 <div className="col-lg-6 d-flex botoes-edicao">
-                                                    <button className="btn btn-crud-chamado " type="button" data-bs-toggle="modal" data-bs-target={`#editar${index}`} onClick={() => {
-                                                        setId(element.id);
-                                                        setCategoriaEdit(element.categoria)
-                                                        setDescricaoEdit(element.descricao);
-                                                        setSalaEdit(element.sala);
-                                                        setItemDefeitoEdit(element.itemDefeito);
-                                                        setBlocoEdit(element.bloco)
-                                                    }}>Editar</button>
-                                                </div>
-                                                <div className="modal fade" id={`editar${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div className="modal-dialog">
-                                                        <div className="modal-content">
-                                                            <div className="modal-header">
-                                                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Edite seu chamado</h1>
-                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div className="modal-body">
-                                                                <form className="row">
-                                                                    
-                                                                    <h6>Selecione tudo para editar: </h6>
+                                                    {element.resposta != null ? (
+                                                        <p>Respondida</p>
+                                                        ): (
+                                                        <button className = "btn btn-crud-chamado " type = "button" data-bs-toggle="modal" data-bs-target={`#editar${index}`} onClick={() => {
+                                                            setId(element.id);
+                                                            setCategoriaEdit(element.categoria)
+                                                            setDescricaoEdit(element.descricao);
+                                                            setSalaEdit(element.sala);
+                                                            setItemDefeitoEdit(element.itemDefeito);
+                                                            setBlocoEdit(element.bloco)
+                                                        }}>Editar</button>
+                                                        
+                                                    )}
+                                            </div>
+                                            <div className="modal fade" id={`editar${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Edite seu chamado</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <form className="row">
+
+                                                                <h6>Selecione tudo para editar: </h6>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">categoria:</label>
+                                                                    <select id="select-item" className="form-select" value={categoriaEdit} onChange={(e) => setCategoriaEdit(e.target.value)} aria-label="Default select example">
+                                                                        <option value="" hidden disabled>
+                                                                            Categoria
+                                                                        </option>
+                                                                        {categorias.map((opcao) => (
+                                                                            <option value={opcao.value} >{opcao.label}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Item:</label>
+                                                                    <select id="select-item" className="form-select" value={itemDefeitoEdit} onChange={(e) => setItemDefeitoEdit(e.target.value)} aria-label="Default select example">
+                                                                        <option value="" hidden disabled>
+                                                                            Item
+                                                                        </option>
+                                                                        {itens.map((opcao) => (
+                                                                            <option value={opcao.value} >{opcao.item}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+
+                                                                <div className="col-md-12">
+                                                                    <label for="validationCustom02" className="form-label">Descricao: </label>
+                                                                    <input type="text" className="form-control" id="validationCustom02" value={descricaoEdit} onChange={(e) => setDescricaoEdit(e.target.value)} />
+                                                                </div>
+
+                                                                <hr className="mt-4"></hr>
+                                                                <div className="col-md-6">
+                                                                    <label className="form-label">Bloco:</label>
+                                                                    <select className="form-select" value={blocoEdit} onChange={(e) => setBlocoEdit(e.target.value)} aria-label="Default select example">
+                                                                        <option value="" hidden disabled>
+                                                                            Bloco
+                                                                        </option>
+                                                                        {blocos.map((opcao) => (
+                                                                            <option value={opcao.value} >{opcao.label}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+
+                                                                {blocoEdit ? (
                                                                     <div className="col-md-6">
-                                                                        <label className="form-label">categoria:</label>
-                                                                        <select id="select-item" className="form-select" value={categoriaEdit} onChange={(e) => setCategoriaEdit(e.target.value)} aria-label="Default select example">
+                                                                        <label className="form-label">Sala:</label>
+                                                                        <select id="select-sala" className="form-select" value={salaEdit} onChange={(e) => setSalaEdit(e.target.value)} aria-label="Default select example">
                                                                             <option value="" hidden disabled>
-                                                                                Categoria
+                                                                                Sala
                                                                             </option>
-                                                                            {categorias.map((opcao) => (
-                                                                                <option value={opcao.value} >{opcao.label}</option>
+                                                                            {salas.map((opcao) => (
+                                                                                <option value={opcao.value} >{opcao.sala}</option>
                                                                             ))}
                                                                         </select>
                                                                     </div>
+                                                                ) : (
+                                                                    <fieldset disabled className="col-md-6">
+                                                                        <label className="form-label">Sala</label>
+                                                                        <select id="select-sala" className="form-select" onChange={(e) => setSalaEdit(e.target.value)} aria-label="Default select example">
 
-                                                                        <div className="col-md-6">
-                                                                            <label className="form-label">Item:</label>
-                                                                            <select id="select-item" className="form-select" value={itemDefeitoEdit} onChange={(e) => setItemDefeitoEdit(e.target.value)} aria-label="Default select example">
-                                                                            <option value="" hidden disabled>
-                                                                                Item
-                                                                            </option>
-                                                                                {itens.map((opcao) => (
-                                                                                    <option value={opcao.value} >{opcao.item}</option>
-                                                                                ))}
-                                                                            </select>
-                                                                        </div>
-                                                                    
-                                                                    <div className="col-md-12">
-                                                                        <label for="validationCustom02" className="form-label">Descricao: </label>
-                                                                        <input type="text" className="form-control" id="validationCustom02" value={descricaoEdit} onChange={(e) => setDescricaoEdit(e.target.value)} />
-                                                                    </div>
-
-                                                                    <hr className="mt-4"></hr>
-                                                                    <div className="col-md-6">
-                                                                        <label className="form-label">Bloco:</label>
-                                                                        <select className="form-select" value={blocoEdit} onChange={(e) => setBlocoEdit(e.target.value)} aria-label="Default select example">
-                                                                            <option value="" hidden disabled>
-                                                                                Bloco
-                                                                            </option>
-                                                                            {blocos.map((opcao) => (
-                                                                                <option value={opcao.value} >{opcao.label}</option>
-                                                                            ))}
                                                                         </select>
-                                                                    </div>
+                                                                    </fieldset>
 
-                                                                    {blocoEdit ? (
-                                                                        <div className="col-md-6">
-                                                                            <label className="form-label">Sala:</label>
-                                                                            <select id="select-sala" className="form-select" value={salaEdit} onChange={(e) => setSalaEdit(e.target.value)} aria-label="Default select example">
-                                                                                <option value="" hidden disabled>
-                                                                                    Sala
-                                                                                </option>
-                                                                                {salas.map((opcao) => (
-                                                                                    <option value={opcao.value} >{opcao.sala}</option>
-                                                                                ))}
-                                                                            </select>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <fieldset disabled className="col-md-6">
-                                                                            <label className="form-label">Sala</label>
-                                                                            <select id="select-sala" className="form-select" onChange={(e) => setSalaEdit(e.target.value)} aria-label="Default select example">
+                                                                )
 
-                                                                            </select>
-                                                                        </fieldset>
-
-                                                                    )
-
-                                                                    }
+                                                                }
 
 
-                                                                </form>
-                                                            </div>
-                                                            <div className="modal-footer">
-                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => editar()}>Editar</button>
-                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => editar()}>Editar</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                        ))}
-                    </>
+                            {element.resposta ? (
+                            <div className="mt-1 mb-2 card border-0">
+                                <div className="m-2 card-body row resposta-card">
+                                    <div className="col-md-2 text-center" style={{ padding: 0 }}>
+                                        <h3 className="card-title ">Resposta:</h3>
+                                        <p className="card-text text-muted">{element.dataResposta.toLocaleString()}</p>
+                                    </div>
+                                    <div className="col-md-8">
+                                        <p style={{ fontSize: "18px" }}>{element.resposta}</p>
+                                    </div>
 
-                ) : (
-                    <div className="d-flex justify-content-center align-items-center mt-5">
-                        Escreva seu primeiro chamado
-                    </div>
+                                </div>
+                            </div>
+                        ) : ""}
+                            </div>
+                        ))}
+            </>
+
+            ) : (
+            <div className="d-flex justify-content-center align-items-center mt-5">
+                Escreva seu primeiro chamado
+            </div>
                 )}
 
 
 
-            </section>
+        </section >
         </>
     )
 }

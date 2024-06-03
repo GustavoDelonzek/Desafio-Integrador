@@ -7,3 +7,7 @@
 #cabecalho{
     background-color: #2D6396;
 }
+
+#cabecalho .hover-button:hover, #cabecalho .hover-button:focus{
+    color: white;
+}

@@ -31,12 +31,12 @@ function FiltrarProvider({ children }) {
     useEffect(() => {
 
         async function loadChamado() {
-           
+
             const unsub = onSnapshot(collection(db, "chamados"), (snapshot) => {
                 let listaChamados = [];
-    
-                snapshot.forEach((documento) =>{
-    
+
+                snapshot.forEach((documento) => {
+
                     listaChamados.push({
                         id: documento.id,
                         categoria: documento.data().categoria,
@@ -45,66 +45,101 @@ function FiltrarProvider({ children }) {
                         descricao: documento.data().descricao,
                         itemDefeito: documento.data().itemDefeito,
                         data: documento.data().data.toDate(),
-                        usuario: documento.data().usuario
+                        usuario: documento.data().usuario,
+                        resposta: documento.data().resposta,
+                        dataResposta: documento.data().dataResposta ? documento.data().dataResposta.toDate() : null
                     });
                 })
-    
+
                 setChamadosNti(listaChamados);
             });
         }
-            
-        loadChamado();   
+
+        loadChamado();
     }, []);
 
+    async function chamadosRespondidos() {
+        const unsub = onSnapshot(collection(db, "chamados"), (snapshot) => {
+            let listaChamados = [];
 
-
-    async function filtragem(colecao, escolha) {
-        try {
-            const q = query(collection(db, "chamados"), where(colecao, "==", escolha))
-            const querySnapshot = await getDocs(q);
-            const listaChamados = [];
-            querySnapshot.forEach((doc) => {
-                listaChamados.push(
-                    {
-                        id: doc.id,
-                        categoria: doc.data().categoria,
-                        sala: doc.data().sala,
-                        bloco: doc.data().bloco,
-                        descricao: doc.data().descricao,
-                        itemDefeito: doc.data().itemDefeito,
-                        data: doc.data().data.toDate(),
-                        usuario: doc.data().usuario
-                    }
-                )
+            snapshot.forEach((documento) => {
+                if(documento.data().resposta != null){
+                    listaChamados.push({
+                        id: documento.id,
+                        categoria: documento.data().categoria,
+                        sala: documento.data().sala,
+                        bloco: documento.data().bloco,
+                        descricao: documento.data().descricao,
+                        itemDefeito: documento.data().itemDefeito,
+                        data: documento.data().data.toDate(),
+                        usuario: documento.data().usuario,
+                        resposta: documento.data().resposta,
+                        dataResposta: documento.data().dataResposta ? documento.data().dataResposta.toDate() : null
+                    });
+                }
+                
             })
-            setChamadosFiltrados(listaChamados)
-            if(listaChamados.length === 0){
+
+            setChamadosFiltrados(listaChamados);
+        });
+    }
+
+
+async function filtragem(colecao, escolha) {
+    try {
+        const q = query(collection(db, "chamados"), where(colecao, "==", escolha));
+
+        const unsub = onSnapshot(q, async (querySnapshot) => {
+            let listaChamados = [];
+
+            querySnapshot.forEach((documento) => {
+
+                listaChamados.push({
+                    id: documento.id,
+                    categoria: documento.data().categoria,
+                    sala: documento.data().sala,
+                    bloco: documento.data().bloco,
+                    descricao: documento.data().descricao,
+                    itemDefeito: documento.data().itemDefeito,
+                    data: documento.data().data.toDate(),
+                    usuario: documento.data().usuario,
+                    resposta: documento.data().resposta,
+                    dataResposta: documento.data().dataResposta ? documento.data().dataResposta.toDate() : null
+                });
+            })
+
+            setChamadosFiltrados(listaChamados);
+            if (listaChamados.length === 0) {
                 alert("Nenhuma correspondência")
             }
-        } catch (error) {
-            console.log(error)
-        }
+        });
+
+
+    } catch (error) {
+        console.log(error)
     }
+}
 
 
-   
 
 
-    function cancelarFiltragem(){
-        setChamadosFiltrados([]);
-    }
 
-    return (
-        <FiltrarContext.Provider value={{
-            chamadosNti,
-            chamadosFiltrados,
-            filtragem,
-            cancelarFiltragem
-        }}
-        >
-            {children}
-        </FiltrarContext.Provider>
-    )
+function cancelarFiltragem() {
+    setChamadosFiltrados([]);
+}
+
+return (
+    <FiltrarContext.Provider value={{
+        chamadosNti,
+        chamadosFiltrados,
+        filtragem,
+        cancelarFiltragem,
+        chamadosRespondidos
+    }}
+    >
+        {children}
+    </FiltrarContext.Provider>
+)
 
 }
 

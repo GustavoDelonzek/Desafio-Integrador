@@ -47,7 +47,9 @@ function ChamadoCrudProvider({ children }) {
                         descricao: documento.data().descricao,
                         itemDefeito: documento.data().itemDefeito,
                         data: documento.data().data.toDate(),
-                        usuario: documento.data().usuario
+                        usuario: documento.data().usuario,
+                        resposta: documento.data().resposta,
+                        dataResposta: documento.data().dataResposta?  documento.data().dataResposta.toDate() : null
                     });
                 })
     
@@ -58,6 +60,17 @@ function ChamadoCrudProvider({ children }) {
         loadChamado();   
     }, []);
 
+    const adicionarResposta = async (id, respostaEdit) => {
+        const docRef = doc(db, "chamados", id);
+        await updateDoc(docRef, {
+            resposta: respostaEdit,
+            dataResposta: new Date()
+        }).then(() => {
+            alert('Resposta adicionada com sucesso');
+        }).catch(error => {
+            console.error("Erro ao adicionar resposta: ", error);
+        });
+    };
 
     async function carregarSalas(bloco) {
         try {
@@ -109,7 +122,9 @@ function ChamadoCrudProvider({ children }) {
             data: new Date(),
             itemDefeito: itemDefeito,
             bloco: bloco,
-            sala: sala
+            sala: sala,
+            resposta: null,
+            dataResposta: null
         })
             .then(() => {
                 console.log("CADASTRADO COM SUCESSO")
@@ -154,6 +169,8 @@ function ChamadoCrudProvider({ children }) {
             carregarItens,
             itens,
             editarChamado,
+            
+            adicionarResposta
         }}
         >
             {children}

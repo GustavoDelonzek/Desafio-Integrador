@@ -31,7 +31,7 @@
 
 .card-body{
     height: 100%;
-    background-color: rgba(70, 143, 253, 0.13);
+    background-color: #e7f0ff;
     padding-bottom: 10px;
 }
 
@@ -50,6 +50,28 @@
 .botoes-edicao{
     display: flex;
     justify-content: end;
+}
+.card {
+    background-color: transparent;
+    border: 0;
+}
+
+.resposta-card {
+    background-color: rgb(217, 243, 210);
+    border-radius: 15px;
+    position: relative;
+}
+
+.resposta-card::before {
+    content: "";
+    width: 0; 
+    height: 0; 
+    border-top: 0px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 35px solid rgb(217, 243, 210);
+    position: absolute;
+    top: 0;
+    right: -20px;
 }
 
 @media (max-width: 991px) {
