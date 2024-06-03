@@ -58,30 +58,11 @@ function FiltrarProvider({ children }) {
         loadChamado();
     }, []);
 
-    async function chamadosRespondidos() {
-        const unsub = onSnapshot(collection(db, "chamados"), (snapshot) => {
-            let listaChamados = [];
 
-            snapshot.forEach((documento) => {
-                if(documento.data().resposta != null){
-                    listaChamados.push({
-                        id: documento.id,
-                        categoria: documento.data().categoria,
-                        sala: documento.data().sala,
-                        bloco: documento.data().bloco,
-                        descricao: documento.data().descricao,
-                        itemDefeito: documento.data().itemDefeito,
-                        data: documento.data().data.toDate(),
-                        usuario: documento.data().usuario,
-                        resposta: documento.data().resposta,
-                        dataResposta: documento.data().dataResposta ? documento.data().dataResposta.toDate() : null
-                    });
-                }
-                
-            })
 
-            setChamadosFiltrados(listaChamados);
-        });
+    function chamadosRespondidos() {
+        const respondidos = chamadosNti.filter(chamado => chamado.resposta !== null);
+        setChamadosFiltrados(respondidos);
     }
 
 
@@ -89,7 +70,7 @@ async function filtragem(colecao, escolha) {
     try {
         const q = query(collection(db, "chamados"), where(colecao, "==", escolha));
 
-        const unsub = onSnapshot(q, async (querySnapshot) => {
+        const qualquer = onSnapshot(q, async (querySnapshot) => {
             let listaChamados = [];
 
             querySnapshot.forEach((documento) => {

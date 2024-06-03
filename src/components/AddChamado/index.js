@@ -72,19 +72,19 @@ function AddChamado() {
 
     const categorias = [
         {
-            label: "hardware",
+            label: "Hardware",
             value: "hardware",
         },
         {
-            label: "software",
+            label: "Software",
             value: "software",
         },
         {
-            label: "periferico",
+            label: "Periferico",
             value: "periferico",
         },
         {
-            label: "estrutura",
+            label: "Estrutura",
             value: "estrutura",
         }
     ];
@@ -109,7 +109,7 @@ function AddChamado() {
                         <div className="modal-body">
                             <form id="adicionar1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="row needs-validation">
                             <div className="col-md-6">
-                                    <label className="form-label">categoria:</label>
+                                    <label className="form-label">Categoria:</label>
                                     <select id="select-item" className="form-select" value={categoria} onChange={(e) => setCategoria(e.target.value)} aria-label="Default select example">
                                     <option value="" hidden disabled>
                                                 Categoria
@@ -185,7 +185,7 @@ function AddChamado() {
                                 }
 
 
-                                <div className="col-12 d-flex justify-content-center my-2">
+                                <div className="col-12 d-flex justify-content-center mt-3">
                                     <button className="btn btn-primary" type="submit" data-bs-dismiss="modal" onClick={addChamado}>Adicionar</button>
                                 </div>
                             </form>

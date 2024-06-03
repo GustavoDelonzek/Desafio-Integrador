@@ -230,7 +230,7 @@ function ListarChamado() {
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={() => editar()}>Editar</button>
+                                                            <button type="button" className="btn btn-crud-claro" data-bs-dismiss="modal" onClick={() => editar()}>Editar</button>
                                                         </div>
                                                     </div>
                                                 </div>

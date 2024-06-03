@@ -34,7 +34,7 @@ function ChamadoCrudProvider({ children }) {
            
             const q = query(collection(db, "chamados"), where("usuario", "==", user.email));
         
-            const unsub = onSnapshot(q, async (querySnapshot) => {
+            const unsube = onSnapshot(q, async (querySnapshot) => {
                 let listaChamados = [];
     
                 querySnapshot.forEach((documento) =>{

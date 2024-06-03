@@ -35,6 +35,27 @@
     padding-bottom: 10px;
 }
 
+.modal-header, .modal-footer{
+    background-color: #5787b4;
+    color: #e7f0ff;
+}
+
+.modal-body {
+    background-color: #e7f0ff;
+}
+
+.btn-crud-claro{
+    background-color: var(--azul-claro);
+    
+    color: white;
+}
+.btn-crud-claro:hover{
+    background-color: var(--azul-claro);
+    
+    color: var(--azul-escuro);
+    
+}
+
 #dashboard .maximo-imagem{
     min-height: 200px;
     background-image: url(../../assets/images/ben-kolde-FaPxZ88yZrw-unsplash.jpg);

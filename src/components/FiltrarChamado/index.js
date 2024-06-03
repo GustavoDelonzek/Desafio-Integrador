@@ -18,6 +18,11 @@ function FiltrarChamado() {
         } 
     }
 
+    async function respondidos(e){
+        e.preventDefault();
+        chamadosRespondidos();
+    }
+
     const blocos = [
         {
             label: "CT",
@@ -61,7 +66,7 @@ function FiltrarChamado() {
         <div >
             <div className="d-flex justify-content-center px-4">
                 {chamadosFiltrados.length === 0  ? (
-                    <button className="btn btn-crud-chamado py-1" data-bs-toggle="modal" data-bs-target="#filtrar">
+                    <button className="btn btn-crud-chamado py-1" data-bs-toggle="modal" data-bs-target="#filtrarModal">
                     Filtrar
                 </button>
                 ) : (
@@ -72,7 +77,7 @@ function FiltrarChamado() {
                 
             </div>
 
-            <div className="modal fade" id="filtrar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal fade" id="filtrarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -80,14 +85,14 @@ function FiltrarChamado() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <form id="filtragem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="d-flex justify-content-evenly needs-validation">
+                            <form id="filtragemM" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="d-flex justify-content-evenly needs-validation">
                                 
                                     <button className="btn btn-primary " type="button" data-bs-toggle="modal" data-bs-target="#filtrarBloco" onClick={() => setCollection("bloco")}>Bloco</button>
                                     <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#filtrarCategoria" onClick={() => setCollection("categoria")}>Categoria</button>
                                 
                                 
 
-                                    <button className="btn btn-primary " type="button" data-bs-dismiss="modal" onClick={() => chamadosRespondidos()}>Respondida</button>
+                                    <button className="btn btn-primary " type="button" data-bs-dismiss="modal" onClick={respondidos}>Respondida</button>
                                     
 
                             </form>
@@ -138,7 +143,7 @@ function FiltrarChamado() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <form id="filtrobloco" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="row needs-validation" onSubmit={filtro}>
+                            <form id="filtroCat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="row needs-validation" onSubmit={filtro}>
 
 
                             <div className="">
