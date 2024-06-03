@@ -24,40 +24,38 @@ export const ChamadoCrudContext = createContext({});
 function ChamadoCrudProvider({ children }) {
     const [chamado, setChamado] = useState([]);
     const { user, loading } = useContext(AuthContext);
-    const [salas, setSalas] = useState([])
+    const [salas, setSalas] = useState([]);
+    const [itens, setItens] = useState([])
 
 
     useEffect(() => {
 
         async function loadChamado() {
            
-                try {
-                    const q = query(collection(db, "chamados"), where("usuario", "==", user.email))
-                    const querySnapshot = await getDocs(q);
-
-                    let listaChamados = [];
-                    querySnapshot.forEach((documento) => {
-
-                        listaChamados.push({
-                            id: documento.id,
-                            categoria: documento.data().categoria,
-                            sala: documento.data().sala,
-                            bloco: documento.data().bloco,
-                            descricao: documento.data().descricao,
-                            itemDefeito: documento.data().itemDefeito,
-                            data: documento.data().data.toDate(),
-                            usuario: documento.data().usuario
-                        });
-                    });
-                    setChamado(listaChamados);
-                } catch (error) {
-                    console.error("errou aqui ó", error)
-                }
-            } 
-                
-            
+            const q = query(collection(db, "chamados"), where("usuario", "==", user.email));
         
-        loadChamado();
+            const unsub = onSnapshot(q, async (querySnapshot) => {
+                let listaChamados = [];
+    
+                querySnapshot.forEach((documento) =>{
+    
+                    listaChamados.push({
+                        id: documento.id,
+                        categoria: documento.data().categoria,
+                        sala: documento.data().sala,
+                        bloco: documento.data().bloco,
+                        descricao: documento.data().descricao,
+                        itemDefeito: documento.data().itemDefeito,
+                        data: documento.data().data.toDate(),
+                        usuario: documento.data().usuario
+                    });
+                })
+    
+                setChamado(listaChamados);
+            });
+        }
+            
+        loadChamado();   
     }, []);
 
 
@@ -75,6 +73,26 @@ function ChamadoCrudProvider({ children }) {
                 )
             })
             setSalas(listaSalas)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    async function carregarItens(categoria) {
+        try {
+            const q = query(collection(db, "item"), where("categoria", "==", categoria))
+            const querySnapshot = await getDocs(q);
+            const listaItens = [];
+            querySnapshot.forEach((doc) => {
+                listaItens.push(
+                    {
+                        item: doc.data().item,
+                        value: doc.data().item
+                    }
+                )
+            })
+            setItens(listaItens)
 
         } catch (error) {
             console.log(error)
@@ -109,7 +127,6 @@ function ChamadoCrudProvider({ children }) {
             .then(() => {
 
                 alert("CHAMADO DELETADO COM SUCESSO!");
-                return window.location.reload()
             })
     }
 
@@ -134,6 +151,8 @@ function ChamadoCrudProvider({ children }) {
             chamado,
             salas,
             carregarSalas,
+            carregarItens,
+            itens,
             editarChamado,
         }}
         >

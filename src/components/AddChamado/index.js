@@ -5,15 +5,23 @@ import { set } from "firebase/database";
 
 
 function AddChamado() {
-    const { salas, carregarSalas, handleAdd } = useContext(ChamadoCrudContext)
+    const { salas, carregarSalas, handleAdd, itens, carregarItens } = useContext(ChamadoCrudContext)
     const [bloco, setBloco] = useState('');
     const [categoria, setCategoria] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [itemDefeito, setItemDefeito] = useState('');
 
-
+    
+    
+    const [itemLocal, setItemLocal] = useState('');
     const [salaLocal, setSalaLocal] = useState('')
 
+    useEffect(() => {
+        if (categoria) {
+            carregarItens(categoria);
+            setItemLocal("");
+        }
+    }, [categoria]);
+    
     useEffect(() => {
         if (bloco) {
             carregarSalas(bloco);
@@ -24,15 +32,14 @@ function AddChamado() {
     async function addChamado(e){
         e.preventDefault();
 
-        if(bloco !== '' && salaLocal !== '' && categoria !== '' && descricao !== '' && itemDefeito !== ''){
+        if(bloco !== '' && salaLocal !== '' && categoria !== '' && descricao !== '' && itemLocal !== ''){
             try{
-                await handleAdd(categoria, descricao, itemDefeito, bloco, salaLocal)
+                await handleAdd(categoria, descricao, itemLocal, bloco, salaLocal)
             setBloco('');
             setSalaLocal('');
             setCategoria('');
             setDescricao('');
-            setItemDefeito('');
-            return window.location.reload()
+            setItemLocal('');
             } catch(error){
                 console.error("Erro ao adicionar chamado: ", error)
             }
@@ -63,6 +70,27 @@ function AddChamado() {
     ];
 
 
+    const categorias = [
+        {
+            label: "hardware",
+            value: "hardware",
+        },
+        {
+            label: "software",
+            value: "software",
+        },
+        {
+            label: "periferico",
+            value: "periferico",
+        },
+        {
+            label: "estrutura",
+            value: "estrutura",
+        }
+    ];
+    
+
+
     return (
         <div >
             <div className="d-flex justify-content-center px-4">
@@ -80,20 +108,47 @@ function AddChamado() {
                         </div>
                         <div className="modal-body">
                             <form id="adicionar1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deletar" aria-hidden="true" className="row needs-validation">
-                                <div className="col-md-6">
-                                    <label for="validationCustom01" className="form-label">Categoria:</label>
-                                    <input type="text" className="form-control" id="validationCustom01" value={categoria} onChange={(e) => setCategoria(e.target.value)} />
+                            <div className="col-md-6">
+                                    <label className="form-label">categoria:</label>
+                                    <select id="select-item" className="form-select" value={categoria} onChange={(e) => setCategoria(e.target.value)} aria-label="Default select example">
+                                    <option value="" hidden disabled>
+                                                Categoria
+                                            </option>
+                                        {categorias.map((opcao) => (
+                                            <option value={opcao.value} >{opcao.label}</option>
+                                        ))}
+                                    </select>
                                 </div>
-                                <div className="col-md-6">
-                                    <label for="validationCustom03" className="form-label">Item com defeito: </label>
-                                    <input type="text" className="form-control" id="validationCustom03" value={itemDefeito} onChange={(e) => setItemDefeito(e.target.value)}/>
-                                </div>
+
+                                {categoria ? (
+                                    <div className="col-md-6">
+                                        <label className="form-label">Item:</label>
+                                        <select id="select-item" className="form-select" value={itemLocal} onChange={(e) => setItemLocal(e.target.value)} aria-label="Default select example">
+                                            <option value="" hidden disabled>
+                                                Item
+                                            </option>
+                                            {itens.map((opcao) => (
+                                                <option value={opcao.value} >{opcao.item}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                ) : (
+                                    <fieldset disabled className="col-md-6">
+                                        <label className="form-label">Item</label>
+                                        <select id="teste" className="form-select" onChange={(e) => setSalaLocal(e.target.value)} aria-label="Default select example">
+
+                                        </select>
+                                    </fieldset>
+
+                                )
+
+                                }
                                 <div className="col-md-12">
                                     <label for="validationCustom02" className="form-label">Descricao: </label>
                                     <input type="text" className="form-control" id="validationCustom02" value={descricao} onChange={(e) => setDescricao(e.target.value)}/>
                                 </div>
                                 
-                                <div className="col-md-3">
+                                <div className="col-md-6">
                                     <label className="form-label">Bloco:</label>
                                     <select id="select-bloco" className="form-select" value={bloco} onChange={(e) => setBloco(e.target.value)} aria-label="Default select example">
                                     <option value="" hidden disabled>
@@ -106,7 +161,7 @@ function AddChamado() {
                                 </div>
 
                                 {bloco ? (
-                                    <div className="col-md-3">
+                                    <div className="col-md-6">
                                         <label className="form-label">Sala:</label>
                                         <select id="select-sala" className="form-select" value={salaLocal} onChange={(e) => setSalaLocal(e.target.value)} aria-label="Default select example">
                                             <option value="" hidden disabled>
@@ -118,7 +173,7 @@ function AddChamado() {
                                         </select>
                                     </div>
                                 ) : (
-                                    <fieldset disabled className="col-md-3">
+                                    <fieldset disabled className="col-md-6">
                                         <label className="form-label">Sala</label>
                                         <select id="teste" className="form-select" onChange={(e) => setSalaLocal(e.target.value)} aria-label="Default select example">
 

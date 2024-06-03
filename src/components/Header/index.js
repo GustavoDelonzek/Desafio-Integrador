@@ -16,7 +16,7 @@ function Header() {
                 <div className="container-fluid d-flex flex-row justify-content-end">
                     {user ? (
                         <div className="dropdown  d-flex align-items-center">
-                            <button className='btn dropdown-toggle cor-azul-claro' type='button'  data-bs-toggle='dropdown' aria-expanded="false">{user.cargo}  <PiUserCircleFill size={45} /></button>
+                            <button className='btn dropdown-toggle cor-azul-claro text-uppercase' type='button'  data-bs-toggle='dropdown' aria-expanded="false">{user.cargo}  <PiUserCircleFill size={45} /></button>
                             <ul className='dropdown-menu'>
                                 <li><button onClick={logout} className='dropdown-item'>Sair</button></li>
                             </ul>

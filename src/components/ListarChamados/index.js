@@ -9,7 +9,7 @@ import AddChamado from "../../components/AddChamado";
 
 function ListarChamado() {
 
-    const { chamado, excluirChamado, salas, editarChamado, carregarSalas } = useContext(ChamadoCrudContext);
+    const { chamado, excluirChamado, salas, editarChamado, carregarSalas, itens, carregarItens } = useContext(ChamadoCrudContext);
     const [id, setId] = useState('')
     const [categoriaEdit, setCategoriaEdit] = useState('');
     const [descricaoEdit, setDescricaoEdit] = useState('');
@@ -23,6 +23,13 @@ function ListarChamado() {
             setSalaEdit("");
         }
     }, [blocoEdit]);
+
+    useEffect(() => {
+        if (categoriaEdit) {
+            carregarItens(categoriaEdit);
+            setItemDefeitoEdit("");
+        }
+    }, [categoriaEdit]);
 
     const blocos = [
         {
@@ -42,6 +49,26 @@ function ListarChamado() {
             value: "3",
         },
     ];
+
+    const categorias = [
+        {
+            label: "hardware",
+            value: "hardware",
+        },
+        {
+            label: "software",
+            value: "software",
+        },
+        {
+            label: "periferico",
+            value: "periferico",
+        },
+        {
+            label: "estrutura",
+            value: "estrutura",
+        }
+    ];
+
     async function editar() {
         if (blocoEdit !== '' && salaEdit !== '' && categoriaEdit !== '' && descricaoEdit !== '' && itemDefeitoEdit !== '') {
             try {
@@ -53,7 +80,6 @@ function ListarChamado() {
                 setBlocoEdit('')
                 setSalaEdit('')
 
-                return window.location.reload()
             } catch (error) {
                 alert(error)
             }
@@ -91,7 +117,7 @@ function ListarChamado() {
                                                                 </div>
                                                                 <div class="modal-footer d-flex justify-content-center">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                                    
+
                                                                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onClick={() => excluirChamado(element.id)}>Excluir</button>
                                                                 </div>
                                                             </div>
@@ -101,7 +127,7 @@ function ListarChamado() {
                                                 <hr></hr>
                                             </div>
                                             <p className="card-text">Categoria: {element.categoria}</p>
-                                            
+                                            <p className="card-text">Item: {element.itemDefeito}</p>
                                             <p className="card-text">{element.descricao}</p>
                                             <div className="row">
                                                 <p className="card-text col-lg-6"  >
@@ -126,22 +152,39 @@ function ListarChamado() {
                                                             </div>
                                                             <div className="modal-body">
                                                                 <form className="row">
+                                                                    
+                                                                    <h6>Selecione tudo para editar: </h6>
                                                                     <div className="col-md-6">
-                                                                        <label for="validationCustom01" className="form-label">Categoria:</label>
-                                                                        <input type="text" className="form-control" id="validationCustom01" value={categoriaEdit} onChange={(e) => setCategoriaEdit(e.target.value)} />
+                                                                        <label className="form-label">categoria:</label>
+                                                                        <select id="select-item" className="form-select" value={categoriaEdit} onChange={(e) => setCategoriaEdit(e.target.value)} aria-label="Default select example">
+                                                                            <option value="" hidden disabled>
+                                                                                Categoria
+                                                                            </option>
+                                                                            {categorias.map((opcao) => (
+                                                                                <option value={opcao.value} >{opcao.label}</option>
+                                                                            ))}
+                                                                        </select>
                                                                     </div>
-                                                                    <div className="col-md-6">
-                                                                        <label for="validationCustom03" className="form-label">Item com defeito: </label>
-                                                                        <input type="text" className="form-control" id="validationCustom03" value={itemDefeitoEdit} onChange={(e) => setItemDefeitoEdit(e.target.value)} />
-                                                                    </div>
+
+                                                                        <div className="col-md-6">
+                                                                            <label className="form-label">Item:</label>
+                                                                            <select id="select-item" className="form-select" value={itemDefeitoEdit} onChange={(e) => setItemDefeitoEdit(e.target.value)} aria-label="Default select example">
+                                                                            <option value="" hidden disabled>
+                                                                                Item
+                                                                            </option>
+                                                                                {itens.map((opcao) => (
+                                                                                    <option value={opcao.value} >{opcao.item}</option>
+                                                                                ))}
+                                                                            </select>
+                                                                        </div>
+                                                                    
                                                                     <div className="col-md-12">
                                                                         <label for="validationCustom02" className="form-label">Descricao: </label>
                                                                         <input type="text" className="form-control" id="validationCustom02" value={descricaoEdit} onChange={(e) => setDescricaoEdit(e.target.value)} />
                                                                     </div>
 
                                                                     <hr className="mt-4"></hr>
-                                                                    <h6>Selecione novamente: </h6>
-                                                                    <div className="col-md-3">
+                                                                    <div className="col-md-6">
                                                                         <label className="form-label">Bloco:</label>
                                                                         <select className="form-select" value={blocoEdit} onChange={(e) => setBlocoEdit(e.target.value)} aria-label="Default select example">
                                                                             <option value="" hidden disabled>
@@ -154,7 +197,7 @@ function ListarChamado() {
                                                                     </div>
 
                                                                     {blocoEdit ? (
-                                                                        <div className="col-md-3">
+                                                                        <div className="col-md-6">
                                                                             <label className="form-label">Sala:</label>
                                                                             <select id="select-sala" className="form-select" value={salaEdit} onChange={(e) => setSalaEdit(e.target.value)} aria-label="Default select example">
                                                                                 <option value="" hidden disabled>
@@ -166,7 +209,7 @@ function ListarChamado() {
                                                                             </select>
                                                                         </div>
                                                                     ) : (
-                                                                        <fieldset disabled className="col-md-3">
+                                                                        <fieldset disabled className="col-md-6">
                                                                             <label className="form-label">Sala</label>
                                                                             <select id="select-sala" className="form-select" onChange={(e) => setSalaEdit(e.target.value)} aria-label="Default select example">
 

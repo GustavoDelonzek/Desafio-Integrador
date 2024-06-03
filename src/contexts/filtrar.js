@@ -27,42 +27,40 @@ function FiltrarProvider({ children }) {
 
     const [chamadosFiltrados, setChamadosFiltrados] = useState([]);
 
+
     useEffect(() => {
 
-        async function fetchChamados() {
-            if( chamadosFiltrados.length === 0){
-                try {
-                    const q = collection(db, "chamados");
-                    const querySnapshot = await getDocs(q);
+        async function loadChamado() {
+           
+            const unsub = onSnapshot(collection(db, "chamados"), (snapshot) => {
+                let listaChamados = [];
     
-                    let listaChamados = [];
-                    querySnapshot.forEach((documento) => {
-                        listaChamados.push({
-                            id: documento.id,
-                            categoria: documento.data().categoria,
-                            sala: documento.data().sala,
-                            bloco: documento.data().bloco,
-                            descricao: documento.data().descricao,
-                            itemDefeito: documento.data().itemDefeito,
-                            data: documento.data().data.toDate(),
-                            usuario: documento.data().usuario
-                        });
+                snapshot.forEach((documento) =>{
+    
+                    listaChamados.push({
+                        id: documento.id,
+                        categoria: documento.data().categoria,
+                        sala: documento.data().sala,
+                        bloco: documento.data().bloco,
+                        descricao: documento.data().descricao,
+                        itemDefeito: documento.data().itemDefeito,
+                        data: documento.data().data.toDate(),
+                        usuario: documento.data().usuario
                     });
-                    setChamadosNti(listaChamados);
-                } catch (error) {
-                    console.error("Erro ao buscar chamados: ", error);
-                }
-            }
-            
+                })
+    
+                setChamadosNti(listaChamados);
+            });
         }
-
-        fetchChamados();
+            
+        loadChamado();   
     }, []);
 
 
-    async function filtrarBloco(bloco) {
+
+    async function filtragem(colecao, escolha) {
         try {
-            const q = query(collection(db, "chamados"), where("bloco", "==", bloco))
+            const q = query(collection(db, "chamados"), where(colecao, "==", escolha))
             const querySnapshot = await getDocs(q);
             const listaChamados = [];
             querySnapshot.forEach((doc) => {
@@ -80,33 +78,27 @@ function FiltrarProvider({ children }) {
                 )
             })
             setChamadosFiltrados(listaChamados)
-
+            if(listaChamados.length === 0){
+                alert("Nenhuma correspondência")
+            }
         } catch (error) {
             console.log(error)
         }
     }
 
-    async function excluirChamado(id) {
-        const docRef = doc(db, "chamados", id);
-        await deleteDoc(docRef)
-            .then(() => {
 
-                alert("CHAMADO DELETADO COM SUCESSO!");
-                return window.location.reload()
-            })
-    }
+   
 
 
     function cancelarFiltragem(){
-        setChamadosFiltrados([])
+        setChamadosFiltrados([]);
     }
 
     return (
         <FiltrarContext.Provider value={{
             chamadosNti,
             chamadosFiltrados,
-            filtrarBloco,
-            excluirChamado,
+            filtragem,
             cancelarFiltragem
         }}
         >

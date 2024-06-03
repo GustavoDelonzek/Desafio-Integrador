@@ -5,10 +5,11 @@ import imagem from "../../assets/images/ben-kolde-FaPxZ88yZrw-unsplash.jpg"
 import { IoMdCloseCircle } from "react-icons/io";
 
 import FiltrarChamado from "../FiltrarChamado";
-
+import {ChamadoCrudContext} from "../../contexts/chamadoCrud";
 
 function DashboardNti() {
-    const { chamadosNti, chamadosFiltrados, excluirChamado } = useContext(FiltrarContext);
+    const { chamadosNti, chamadosFiltrados } = useContext(FiltrarContext);
+    const { excluirChamado } = useContext(ChamadoCrudContext);
     
 
 
@@ -49,8 +50,7 @@ function DashboardNti() {
                                                             <div class="modal-footer d-flex justify-content-center">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                                                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onClick={() => {
-                                                                    excluirChamado(element.id).then(() =>
-                                                                        window.location.reload())
+                                                                    excluirChamado(element.id)
                                                                 }}>Excluir</button>
                                                             </div>
                                                         </div>
@@ -60,6 +60,8 @@ function DashboardNti() {
                                             <hr></hr>
                                         </div>
                                         <p className="card-text">Categoria: {element.categoria}</p>
+                                        
+                                        <p className="card-text">Item: {element.itemDefeito}</p>
                                         <p className="card-text">{element.descricao}</p>
                                         <div className="row">
                                             <p className="card-text col-lg-6"  >
@@ -128,6 +130,8 @@ function DashboardNti() {
                                             <hr></hr>
                                         </div>
                                         <p className="card-text">Categoria: {element.categoria}</p>
+                                        
+                                        <p className="card-text">Item: {element.itemDefeito}</p>
                                         <p className="card-text">{element.descricao}</p>
                                         <div className="row">
                                             <p className="card-text col-lg-6"  >
