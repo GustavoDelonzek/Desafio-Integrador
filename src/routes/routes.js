@@ -7,6 +7,7 @@ import Login from "../pages/Login"
 import Cadastro from "../pages/Cadastro";
 import Reservas from "../pages/Reservas" 
 import SuasReservas from "../pages/SuasReservas";
+import ReservasNti from "../pages/ReservasNti";
 
 //Componentes
 import Header from "../components/Header"
@@ -19,6 +20,7 @@ import Private from "../routes/private";
 import { useContext } from "react";
 import VerificarDisponibilidadeProvider from "../contexts/verificaDisponibilidade";
 import  SuasReservasProvider  from "../contexts/suasReservas";
+import TodasReservasProvider from "../contexts/todasReservas";
 function RoutesApp(){
     const {user} = useContext(AuthContext);
 
@@ -34,6 +36,8 @@ function RoutesApp(){
                 </Private>}/>
                 <Route path="/reservas" element={<Private> <VerificarDisponibilidadeProvider> <Reservas/> </VerificarDisponibilidadeProvider></Private>}/>
                 <Route path="/suas-reservas" element={<Private> <SuasReservasProvider> <SuasReservas/> </SuasReservasProvider></Private>}/>
+                <Route path="/todas-reservas" element={<Private> <TodasReservasProvider> <ReservasNti/> </TodasReservasProvider></Private>}/>
+                
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/cadastro" element={<Cadastro/>}/>
             </Routes>

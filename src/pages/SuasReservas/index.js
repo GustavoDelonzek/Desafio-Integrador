@@ -28,12 +28,12 @@ function SuasReservas() {
         <>
             <Header />
             <section id="suas-reservas">
-                {reservas ? (
+                {reservas.length > 0 ? (
                     reservas.map((reserva) => (
                         <div className="p-4" key={reserva.id}>
                             <div className="card">
                                 <div className="card-header">
-                                    Reserva {reserva.id}
+                                    Reserva
                                 </div>
                                 <div className="card-body">
                                     <h5 className="card-title">Datashow: {reserva.modelo}</h5>
@@ -58,7 +58,9 @@ function SuasReservas() {
 
                     ))
                 ) : (
-                    "Sem reservas"
+                    <div  className="d-flex erro-reserva justify-content-center align-items-center">
+                        <p>Você ainda não realizou nenhuma reserva!</p>
+                    </div>
                 )}
             </section>
         </>

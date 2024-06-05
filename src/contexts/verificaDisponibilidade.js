@@ -46,6 +46,13 @@ function VerificarDisponibilidadeProvider({ children }) {
     async function agendarDataShow(agendamentoModelo, agendamentoDia, agendamentoHorario, agendamentoNomeModelo){
         
         try{
+            const q = query(collection(db, "agendamentos"), where("usuario", "==", user.email), where("horario", "==", agendamentoHorario), where("dia", "==", agendamentoDia));
+            const querySnapshot = await getDocs(q)
+
+            if(!querySnapshot.empty) {
+                alert("Você ja tem reserva pra essa data e horário. Verifique suas reservas!")
+                return
+            }
             
             await addDoc(collection(db, "agendamentos"), {
                 modeloId: agendamentoModelo,
