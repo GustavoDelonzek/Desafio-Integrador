@@ -171,7 +171,7 @@ function Reservas() {
                                     </ul>
                                 </>
                             ) : (
-                                <div className="text-danger text-center">Sem modelos disponiveis para essa data e horario !</div>
+                                <div className="text-danger text-center my-5">Sem modelos disponiveis para essa data e horario !</div>
                             )
 
                         ) : (

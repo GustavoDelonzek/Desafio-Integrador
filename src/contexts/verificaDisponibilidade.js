@@ -44,7 +44,9 @@ function VerificarDisponibilidadeProvider({ children }) {
     }
 
     async function agendarDataShow(agendamentoModelo, agendamentoDia, agendamentoHorario, agendamentoNomeModelo){
+        
         try{
+            
             await addDoc(collection(db, "agendamentos"), {
                 modeloId: agendamentoModelo,
                 modelo: agendamentoNomeModelo,

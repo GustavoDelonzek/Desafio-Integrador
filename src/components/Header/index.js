@@ -18,6 +18,7 @@ function Header() {
                     <>
                         {user.cargo === "professor"? (
                             <div>
+                            <Link to="/dashboard" className="btn cor-azul-claro">Home</Link>
                             <Link to="/reservas" className="btn cor-azul-claro">Reservas</Link>
                             <Link to="/suas-reservas" className="btn cor-azul-claro">Suas Reservas</Link>
                             

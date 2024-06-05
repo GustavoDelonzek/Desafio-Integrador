@@ -27,32 +27,53 @@ function SuasReservasProvider({ children }) {
 
     useEffect(() => {
         async function loadReservas() {
-           
+
             const q = query(collection(db, "agendamentos"), where("usuario", "==", user.email));
-        
+
             const unsube = onSnapshot(q, async (querySnapshot) => {
                 let listaReservas = [];
-    
-                querySnapshot.forEach((documento) =>{
-    
+
+                querySnapshot.forEach((documento) => {
+
                     listaReservas.push({
-                       modelo: documento.data().modelo,
-                       dia: documento.data().dia,
-                       horario: documento.data().horario,
-                       modeloId: documento.data().modeloId
+                        id: documento.id,
+                        modelo: documento.data().modelo,
+                        dia: documento.data().dia,
+                        horario: documento.data().horario,
+                        modeloId: documento.data().modeloId
                     });
                 })
-    
+
                 setReservas(listaReservas);
             });
         }
-            
-        loadReservas();   
+
+        loadReservas();
     }, []);
+
+    async function excluirReserva(agendamentoId, modeloId, agendamentoDia, agendamentoHorario) {
+        try {
+            const modeloDocRef = doc(db, "datashows", modeloId);
+            const atualizar = {
+                [`disponibilidade.${agendamentoDia}.${agendamentoHorario}`]: true
+            };
+            await updateDoc(modeloDocRef, atualizar)
+
+            const agendamentoDocRef = doc(db, "agendamentos", agendamentoId);
+            await deleteDoc(agendamentoDocRef).then(() => {
+                alert("Deletado com sucesso")
+            })
+        } catch (error) {
+            console.error("Erro ao excluir sua reserva: ", error)
+        }
+
+
+    }
 
     return (
         <SuasReservasContext.Provider value={{
-            reservas
+            reservas,
+            excluirReserva
         }}
         >
             {children}
