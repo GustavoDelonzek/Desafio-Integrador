@@ -2,12 +2,14 @@ import { Link, Route, BrowserRouter, Routes} from "react-router-dom";
 
 //Páginas
 import Home from "../pages/Home"
-
-//Componentes
-import Header from "../components/Header"
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login"
 import Cadastro from "../pages/Cadastro";
+import Reservas from "../pages/Reservas" 
+import SuasReservas from "../pages/SuasReservas";
+
+//Componentes
+import Header from "../components/Header"
 
 //Context
 import ChamadoCrudProvider from "../contexts/chamadoCrud";
@@ -15,6 +17,8 @@ import FiltrarProvider from "../contexts/filtrar";
 import { AuthContext } from "../contexts/authDetails";
 import Private from "../routes/private";
 import { useContext } from "react";
+import VerificarDisponibilidadeProvider from "../contexts/verificaDisponibilidade";
+import  SuasReservasProvider  from "../contexts/suasReservas";
 function RoutesApp(){
     const {user} = useContext(AuthContext);
 
@@ -28,6 +32,8 @@ function RoutesApp(){
                         </ChamadoCrudProvider>
                     
                 </Private>}/>
+                <Route path="/reservas" element={<Private> <VerificarDisponibilidadeProvider> <Reservas/> </VerificarDisponibilidadeProvider></Private>}/>
+                <Route path="/suas-reservas" element={<Private> <SuasReservasProvider> <SuasReservas/> </SuasReservasProvider></Private>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/cadastro" element={<Cadastro/>}/>
             </Routes>

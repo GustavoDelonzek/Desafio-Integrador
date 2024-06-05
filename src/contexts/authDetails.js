@@ -19,10 +19,8 @@ function AuthProvider({ children }) {
   useEffect(() => {
     async function loadUser() {
       const storageUser = localStorage.getItem('@ticketsPRO');
-      console.log("Storage User: ", storageUser); // Adicione este log
       if (storageUser) {
         const parsedUser = JSON.parse(storageUser);
-        console.log("Parsed User: ", parsedUser); // Adicione este log
         setUser(parsedUser);
       }
       setLoading(false);
@@ -50,7 +48,6 @@ function AuthProvider({ children }) {
 
         setUser(data);
         storageUser(data);
-        console.log("cheguei");
         setLoadingAuth(false);
       })
       .catch((error) => {

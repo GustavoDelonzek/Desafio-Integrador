@@ -13,14 +13,30 @@ function Header() {
     return (
         <header id="cabecalho">
             <nav className="navbar">
-                <div className="container-fluid d-flex flex-row justify-content-end">
+                <div className="container-fluid d-flex flex-row justify-content-between">
                     {user ? (
+                    <>
+                        {user.cargo === "professor"? (
+                            <div>
+                            <Link to="/reservas" className="btn cor-azul-claro">Reservas</Link>
+                            <Link to="/suas-reservas" className="btn cor-azul-claro">Suas Reservas</Link>
+                            
+                        </div>    
+                        ) : (
+                            <div>
+
+                            </div>
+                        )}
+                        
                         <div className="dropdown  d-flex align-items-center">
-                            <button className='btn dropdown-toggle cor-azul-claro hover-button text-uppercase' type='button'  data-bs-toggle='dropdown' aria-expanded="false">{user.cargo}  <PiUserCircleFill size={45} /></button>
+                            <button className='btn dropdown-toggle cor-azul-claro hover-button text-uppercase' type='button' data-bs-toggle='dropdown' aria-expanded="false">{user.cargo}  <PiUserCircleFill size={45} /></button>
+
                             <ul className='dropdown-menu'>
                                 <li><button onClick={logout} className='dropdown-item'>Sair</button></li>
                             </ul>
                         </div>
+
+                    </>
 
                     )
                         : ('Erro ao carregar dados...')}
