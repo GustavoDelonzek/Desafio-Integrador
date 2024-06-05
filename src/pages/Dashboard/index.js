@@ -18,8 +18,7 @@ function Dashboard() {
 
             <Header></Header>
             <main id="dashboard" className="py-4" >
-                {user.cargo == "professor" || user.cargo == "aluno" ? (
-                    
+                {user.cargo == "professor" || user.cargo == "aluno" ? (     
                     <ListarChamado/>
                 ): (
                     <DashboardNti/>

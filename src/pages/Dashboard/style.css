@@ -1,6 +1,21 @@
 :root{
     --azul-escuro: #2D6396;
     --azul-claro: #b5cbe0;
+    --laranja: #f8e432;
+    --verde: #90E39A;
+}
+
+
+.back-azul-escuro{
+    background-color: var(--azul-escuro);
+}
+
+.cor-verde{
+    color: var(--verde);
+}
+
+.cor-laranja{
+    color: var(--laranja);
 }
 
 .cor-azul-claro{
@@ -56,23 +71,14 @@
     
 }
 
-#dashboard .maximo-imagem{
-    min-height: 200px;
-    background-image: url(../../assets/images/ben-kolde-FaPxZ88yZrw-unsplash.jpg);
-    background-size: cover;
-    background-position: center center;
-}
 
-.imagem-card{
-    max-width: 100%;
-    min-height: 100%;
-}
+
 
 .botoes-edicao{
     display: flex;
     justify-content: end;
 }
-.card {
+.card-reposta-background {
     background-color: transparent;
     border: 0;
 }

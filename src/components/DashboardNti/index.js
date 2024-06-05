@@ -7,6 +7,9 @@ import { IoMdCloseCircle } from "react-icons/io";
 import FiltrarChamado from "../FiltrarChamado";
 import { ChamadoCrudContext } from "../../contexts/chamadoCrud";
 
+import { CgDanger } from "react-icons/cg";
+import { FaRegCheckCircle } from "react-icons/fa";
+
 function DashboardNti() {
     const { chamadosNti, chamadosFiltrados } = useContext(FiltrarContext);
     const { excluirChamado, adicionarResposta } = useContext(ChamadoCrudContext);
@@ -39,9 +42,23 @@ function DashboardNti() {
             <section className="p-1 container">
                 {chamadosFiltrados.length === 0 ? (
                     chamadosNti.map((element, index) => (
+                        <div>
                         <div className="card mb-3" key={element.id}>
                             <div className="row g-0">
-                                <div className="col-md-2 col-sm-4 col-12 maximo-imagem" >
+                                <div className="col-md-2 col-sm-4 col-12  back-azul-escuro d-flex flex-column justify-content-center align-items-center" >
+                                {element.resposta != null ? (
+                                                <>   
+                                                    <span className="cor-verde"><FaRegCheckCircle size={60} /></span>
+                                                    <p className="cor-verde">Concluído</p>
+                                                </>
+                                            ) : (
+                                                <>   
+                                                <span className="cor-laranja"><CgDanger size={60} /></span>
+                                                    <p className="cor-laranja">Em atendimento</p>
+                                                </>
+
+                                            )}
+
                                 </div>
                                 <div className="col-md-10 col-sm-8">
                                     <div className="card-body d-flex flex-column justify-content-between">
@@ -105,8 +122,11 @@ function DashboardNti() {
                                     </div>
                                 </div>
                             </div>
-                            {element.resposta ? (
-                                <div className="mt-1 mb-2 card border-0">
+                            
+
+                        </div>
+                        {element.resposta ? (
+                                <div className="mt-1 mb-2 card card-reposta-background border-0">
                                     <div className="m-2 card-body row resposta-card">
                                         <div className="col-md-2 text-center" style={{ padding: 0 }}>
                                             <h3 className="card-title ">Resposta:</h3>
@@ -119,14 +139,25 @@ function DashboardNti() {
                                     </div>
                                 </div>
                             ) : ""}
-
                         </div>
-
                     ))
                 ) : (chamadosFiltrados.map((element, index) => (
+                    <div>
                     <div className="card mb-3" key={element.id}>
                         <div className="row g-0">
-                            <div className="col-md-2 col-sm-4 col-12 maximo-imagem" >
+                            <div className="col-md-2 col-sm-4 col-12 back-azul-escuro d-flex flex-column justify-content-center align-items-center" >
+                            {element.resposta != null ? (
+                                                <>   
+                                                    <span className="cor-verde"><FaRegCheckCircle size={60} /></span>
+                                                    <p className="cor-verde">Concluído</p>
+                                                </>
+                                            ) : (
+                                                <>   
+                                                <span className="cor-laranja"><CgDanger size={60} /></span>
+                                                    <p className="cor-laranja">Em atendimento</p>
+                                                </>
+
+                                            )}
                             </div>
                             <div className="col-md-10 col-sm-8">
                                 <div className="card-body d-flex flex-column justify-content-between">
@@ -190,8 +221,10 @@ function DashboardNti() {
                                 </div>
                             </div>
                         </div>
-                        {element.resposta ? (
-                            <div className="mt-1 mb-2 card border-0">
+                        
+                    </div>
+                    {element.resposta ? (
+                            <div className="mt-1 mb-2 card card-reposta-background border-0">
                                 <div className="m-2 card-body row resposta-card">
                                     <div className="col-md-2 text-center" style={{ padding: 0 }}>
                                         <h3 className="card-title ">Resposta:</h3>
